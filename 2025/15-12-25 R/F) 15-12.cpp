@@ -1,142 +1,107 @@
-struct Envio{
+// ============================================================================
+// EXAMEN FINAL: 15/12/2025
+// MATERIA: Algoritmos y Estructuras de Datos (UTN-FRBA)
+// ============================================================================
+
+#include <iostream>
+
+using namespace std;
+
+/*
+----------------------------------------------------------------------------
+EJERCICIO 3: Salidas por Pantalla (Análisis de Código)
+----------------------------------------------------------------------------
+- a. Código recursivo con condición base "if (n == 0) return 0;" multiplicando los retornos.
+     - SALIDA: 0
+     - JUSTIFICACIÓN: Al llegar al caso base (n == 0), devuelve 0, lo que anula 
+       recursivamente toda la cadena de multiplicaciones del factorial.
+
+- b. Acceso a memoria dinámica "*cout << (p + 2) << endl;" en un array de enteros.
+     - SALIDA: 15
+     - JUSTIFICACIÓN: *(p + 2) es equivalente por aritmética de punteros a acceder 
+       al índice p[2], cuyo valor asignado es 15.
+
+----------------------------------------------------------------------------
+EJERCICIO 4: Teoría (V o F)
+----------------------------------------------------------------------------
+- a. Si el ejercicio 1 hubiera pedido intersección entre pila y cola se podría haber 
+     realizado sin estructuras auxiliares.
+     - RESPUESTA: FALSO.
+     - JUSTIFICACIÓN: Para contrastar todos los elementos entre dos estructuras 
+       destructivas (como Pilas y Colas) sin perder los datos originales en el 
+       proceso, obligatoriamente requerimos de estructuras auxiliares para preservar la información.
+
+- b. El corte de control de archivos permite generar un listado sumariando resultados 
+     para las claves repetidas por las que está ordenado el archivo.
+     - RESPUESTA: VERDADERO.
+     - JUSTIFICACIÓN: Esa es precisamente la definición y el objetivo algorítmico 
+       de la estrategia de corte de control.
+*/
+
+// --- EJERCICIO 1: Intersección Pila y Vector ---
+struct Envio {
     int id_envio;
     float precio;
 };
 
-struct Nodo{
+struct NodoEnvio {
     Envio info;
-    Nodo *sgte;
+    NodoEnvio* sgte;
 };
 
-void armarListaOrdenada(Nodo *&, Nodo *&, Envio [], int );
-Envio pop(Nodo *&);
-void insertarOrdenado(Nodo *&lista, Envio);
-void vaciarElementoEnVector(Nodo *&, Envio [], int &);
-void ordenarVector(Envio [], int);
-Nodo *armarListaOrdenadoDos(Nodo *&, Envio [], int );
+// Prototipos de primitivas asumidas
+Envio pop(NodoEnvio*& pila);
+void insertarOrdenado(NodoEnvio*& lista, Envio info);
 
-int main(){
-    return 0;
-}
-//forma uno: sin usar apareo. Forma incorrecta ya que no sabemos cuantos elementos tiene la pila
-void armarListaOrdenada(Nodo *&lista, Nodo *&pila, Envio vecEnvios[], int tamVecEnvios){
+void armarListaOrdenada(NodoEnvio*& lista, NodoEnvio*& pila, Envio vecEnvios[], int tamVecEnvios) {
     Envio auxEnvio;
-    while(pila != NULL){
+    while (pila != NULL) {
         auxEnvio = pop(pila);
-        for(int i = 0; i <tamVecEnvios; i++){
-            if(auxEnvio.id_envio == vecEnvios[i].id_envio){
+        for (int i = 0; i < tamVecEnvios; i++) {
+            if (auxEnvio.id_envio == vecEnvios[i].id_envio) {
                 insertarOrdenado(lista, auxEnvio);
             }
         }
     }
 }
 
-//Forma dos: Usando el apareo de vectores.
-void vaciarElementoEnVector(Nodo *&pila, Envio vecEnvios[], int &tamVecEnvios){
-    Envio aux;
-    while(pila != NULL){
-        aux = pop(pila);
-        vecEnvios[tamVecEnvios] = aux;
-        tamVecEnvios++; //aumentar el tamaño del vector apuntando a su dirección de memoria
-    }
-}
-
-void ordenarVector(Envio vecEnvios[], int tamVecEnvios){
-    Envio aux;
-    for(int i = 0; i < tamVecEnvios - 1; i++){
-        for(int j = 0; j<tamVecEnvios - 1 - i; j++){
-            if(vecEnvios[j].id_envio > vecEnvios[j+1].id_envio){
-                aux = vecEnvios[j];
-                vecEnvios[j] = vecEnvios[j+1];
-                vecEnvios[j+1] = aux;
-            }
-        }
-    }
-}
-
-Nodo *armarListaOrdenadoDos(Nodo *&pila, Envio vecEnviosUno[], int tamVecUno) {
-    Nodo *listaAux = NULL;
-    int tamVecDos = 0;
-    Envio vecEnviosDos[100];
-    vaciarElementoEnVector(pila, vecEnviosDos, tamVecDos);
-    ordenarVector(vecEnviosUno, tamVecUno);
-    ordenarVector(vecEnviosDos, tamVecDos);
-    
-    int i = 0;
-    int j = 0;
-    
-    while (i < tamVecUno && j < tamVecDos) {
-        if (vecEnviosUno[i].id_envio == vecEnviosDos[j].id_envio) {
-            insertarOrdenado(listaAux, vecEnviosUno[i]);
-            i++;
-            j++;
-        }
-        else if (vecEnviosUno[i].id_envio < vecEnviosDos[j].id_envio) {
-            i++;
-        }
-        else {
-            j++;
-        }
-    }
-    return listaAux;
-}
-
-//Ejercicio 2:
-
-struct Reservas{
+// --- EJERCICIO 2: Actualización de Estructuras Combinadas ---
+struct Reservas {
     int numHabitacion;
-    char tipo;
+    char tipo; // 'E' Estándar, 'P' Premium
     int canDias;
 };
 
-struct Reserva{
+struct Reserva {
     int numHabitacion;
     int cantDiasReservados;
 };
 
-struct Nodo{
+struct NodoReserva {
     Reserva info;
-    Nodo *sgte;
+    NodoReserva* sgte;
 };
 
-void actualizarVector(Nodo *, Nodo *, Reservas [], int){
-
-int main(){
-    return 0;
-}
-
-//suponiendo que NO hay habitaciones con el mismo número pero con diferente tipo
-void actualizarVector(Nodo *listaEstandar, Nodo *listaPremium, Reservas vecReservas[], int tamVecReservas){
-    while(listaEstandar != NULL){
-        for(int i = 0; i < tamVecReservas; i++){
-            if(listaEstandar->info.numHabitacion == vecReservas[i].numHabitacion){
+void actualizarVector(NodoReserva* listaEstandar, NodoReserva* listaPremium, Reservas vecReservas[], int tamVecReservas) {
+    while (listaEstandar != NULL) {
+        for (int i = 0; i < tamVecReservas; i++) {
+            if (listaEstandar->info.numHabitacion == vecReservas[i].numHabitacion) {
                 vecReservas[i].canDias -= listaEstandar->info.cantDiasReservados;
             }
         }
-}
-
-while(listaPremium != NULL){
-    for(int i = 0; i < tamVecReservas; i++){
-        if(listaPremium->info.numHabitacion == vecReservas[i].numHabitacion){
-            vecReservas[i].canDias -= listaPremium->info.cantDiasReservados;
+        listaEstandar = listaEstandar->sgte;
+    }
+    
+    while (listaPremium != NULL) {
+        for (int i = 0; i < tamVecReservas; i++) {
+            if (listaPremium->info.numHabitacion == vecReservas[i].numHabitacion) {
+                vecReservas[i].canDias -= listaPremium->info.cantDiasReservados;
+            }
         }
+        listaPremium = listaPremium->sgte;
     }
 }
+
+int main() {
+    return 0;
 }
-
-//Ejercicio 3-a:
-/*El código no tiene errores de sintaxis, pero si un error en la lógica, al
-decir if (n == 0) return 0;, lo que provoca es que al final de todo, se
-anule el factorial del número n, entonces. La salida es 0*/
-
-//Ejercicio 3-b:
-/*La salida del ejercicio es 15, ya que al acceder al *(p+2) primero
-desreferencia y es como si estuviera accediendo a p[2].*/
-
-//Ejercicio 4-a:
-/*El enunciado es Falso, ya que si o si, necesitamos un elemento auxiliar
-para poder completar la intersección de ambos elementos.*/
-
-//Ejercicio 4-b:
-/*El enunciado es Verdadero, el corte de control genera la lista sumarizando
-los resultados que tengan la clave repetida.*/
