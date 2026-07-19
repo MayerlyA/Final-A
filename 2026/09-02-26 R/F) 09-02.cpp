@@ -86,3 +86,21 @@ NodoA* alumnosDestacados(NodoA* x[5][10], int anios, int materias) {
 int main() {
     return 0;
 }
+
+// EJERCICIO 1
+/*
+a. Es falso porque aplica la aritmética de punteros, debido a que incrementa la dirección
+de memoria, no el valor de la misma.
+b. Es Falso ya que si bien “l” lo pasan por valor, la copia del puntero y el original están
+apuntando a la misma dirección de memoria. Por lo cual, si se modifica el valor del nodo de la lista
+original
+*/
+
+// EJERCICIO 2
+
+/*a. compila y la salida es “10 10 19”, porque
+cout << mat[0][0]; // mat[0][0] += mat[2][2] -> 1 + 9 = 10
+cout << mat[1][1]; // mat[1][1] += mat[1][1] -> 5 + 5 = 10
+cout << mat[2][2]; // mat[2][2] += mat[0][0] -> 9 + 10 = 19
+b. El ejercicio compila pero se queda trabado en un bucle infinito.
+*/

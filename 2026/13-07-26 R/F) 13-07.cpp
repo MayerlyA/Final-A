@@ -109,3 +109,19 @@ b) VERDADERO. Siguiendo la restricción abstracta FIFO de la cátedra de la UTN,
 int main() {
     return 0;
 }
+
+// EJERCICIO 3
+/*
+a)
+36
+24
+b)14
+*/
+
+// EJERCICIO 4
+/*a) Falso, el último elemento de una lista doblemente enlazada apunta a
+NULL.
+b) Verdadero, las únicas operaciones que tenemos disponibles son queue
+(para agregar), unqueue (para quitar), si queremos ver el siguiente
+elemento de una cola, si o si debemos quitar el actual y el
+siguiente para verlo.*/

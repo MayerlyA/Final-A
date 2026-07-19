@@ -82,6 +82,7 @@ struct NodoReserva {
     NodoReserva* sgte;
 };
 
+//suponiendo que NO hay habitaciones con el mismo número pero con diferente tipo
 void actualizarVector(NodoReserva* listaEstandar, NodoReserva* listaPremium, Reservas vecReservas[], int tamVecReservas) {
     while (listaEstandar != NULL) {
         for (int i = 0; i < tamVecReservas; i++) {
@@ -105,3 +106,24 @@ void actualizarVector(NodoReserva* listaEstandar, NodoReserva* listaPremium, Res
 int main() {
     return 0;
 }
+
+// EJERCICIO 3
+/*
+Ejercicio 3-a:
+El código no tiene errores de sintaxis, pero si un error en la lógica, al
+decir if (n == 0) return 0;, lo que provoca es que al final de todo, se
+anule el factorial del número n, entonces. La salida es 0
+
+Ejercicio 3-b:
+La salida del ejercicio es 15, ya que al acceder al *(p+2) primero
+desreferencia y es como si estuviera accediendo a p[2].
+*/
+
+// EJERCICIO 4
+/*Ejercicio 4-a:
+El enunciado es Falso, ya que si o si, necesitamos un elemento auxiliar
+para poder completar la intersección de ambos elementos.
+Ejercicio 4-b:
+El enunciado es Verdadero, el corte de control genera la lista sumarizando
+los resultados que tengan la clave repetida.
+*/
